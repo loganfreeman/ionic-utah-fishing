@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController, NavParams, LoadingController, Loading, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading, AlertController, PopoverController } from 'ionic-angular';
 
 import { IonicPage } from 'ionic-angular';
 
@@ -34,9 +34,14 @@ export class FishingPage {
   });
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiNativeProvider, public loadingCtrl: LoadingController,
-    private launchNavigator: LaunchNavigator, private geolocation : Geolocation, public alertCtrl: AlertController) {
-    this.items = this.apiProvider.getHotSpots();
+    private launchNavigator: LaunchNavigator, private geolocation : Geolocation, public alertCtrl: AlertController,
+    public popoverCtrl: PopoverController) {
 
+
+  }
+
+  loadingHotspots() {
+    this.items = this.apiProvider.getHotSpots();
     this.originalItems = this.items;
 
     this.items.subscribe(response=>{
@@ -47,9 +52,17 @@ export class FishingPage {
   }
 
   ionViewDidEnter(){
+      this.loadingHotspots();
       //this.getUserPosition();
       //this.loadMap();
       this.currentPos = this.getUserPosition();
+  }
+
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create('FishingOptionsPage');
+    popover.present({
+      ev: myEvent
+    });
   }
 
   showAlert(title, subtitle) {
