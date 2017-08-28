@@ -1,0 +1,29 @@
+<!--
+  Generated template for the DistancePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+    <ion-title>Modals</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Distance</ion-label>
+      <ion-input type="number" [(ngModel)]="distance" (blur)="distanceChange($event)"></ion-input>
+      <ion-badge item-end color="secondary">{{distance}}</ion-badge>
+    </ion-item>
+  </ion-list>
+  <button ion-button color="danger" full (click)="dismiss()">Close Modal</button>
+
+</ion-content>

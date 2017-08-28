@@ -52,7 +52,12 @@ export class FishingPage {
   }
 
   ionViewDidEnter(){
+    try{
       this.loadingHotspots();
+
+    }catch(e) {
+      this.loading.dismiss();
+    }
       //this.getUserPosition();
       //this.loadMap();
       this.currentPos = this.getUserPosition();
