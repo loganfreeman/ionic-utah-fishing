@@ -68,6 +68,17 @@ export class FishingPage {
     popover.present({
       ev: myEvent
     });
+
+    popover.onDidDismiss(data => {
+      if(data.hasOwnProperty('status')) {
+        return this.onStatusChange(data.status);
+      }
+
+      if(data.hasOwnProperty('distance')) {
+        return this.distanceChange(data.distance);
+      }
+
+    })
   }
 
   showAlert(title, subtitle) {
@@ -120,13 +131,13 @@ export class FishingPage {
          }));
   }
 
-  distanceChange() {
+  distanceChange(distance) {
+    if(!distance) {
+      distance = 0;
+    }
     // this.showAlert("distance changed", this.distance);
     this.currentPos.then(pos => {
-      if(!this.distance) {
-        this.distance = 0;
-      }
-      this.getHotSpotsInRadius(this.distance * 1609.34, pos);
+      this.getHotSpotsInRadius(distance * 1609.34, pos);
     });
   }
 
