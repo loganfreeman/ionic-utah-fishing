@@ -24,8 +24,8 @@
     </ion-card-content>
 
     <ion-card>
+      <ion-card-header>Where to catch</ion-card-header>
       <ion-card-content>
-        <<ion-card-header>>Where to catch</<ion-card-header>>
         <ion-list>
           <ion-item  *ngFor="let location of (detail | async)?.where" >
             {{location}}
@@ -39,8 +39,9 @@
 
 
   <ion-card>
+    <ion-card-header>Regulations</ion-card-header>
+
     <ion-card-content>
-      <<ion-card-header>>Regulations</<ion-card-header>>
       <ion-list>
         <ion-item  *ngFor="let regulation of (detail | async)?.regulations" >
           {{regulation}}
