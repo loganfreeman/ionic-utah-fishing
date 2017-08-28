@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tabs</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="action-sheets-basic-page">
+  <ion-tabs>
+    <ion-tab [root]="tab2Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
+    <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
+  </ion-tabs>
+</ion-content>

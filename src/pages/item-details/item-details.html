@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{selectedItem.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="selectedItem">
+
+    <ion-card-header>
+      <strong>Latest fishing report</strong>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{(detail | async)?.summary}}
+    </ion-card-content>
+
+    <ion-card>
+      <ion-card-content>
+        <h4>
+          <strong>Location:</strong> {{(detail | async)?.Location}}
+        </h4>
+        <h4>
+          <strong>Directions:</strong>
+
+          {{(detail | async)?.Directions}}
+
+          <button ion-button (click)="navigate(selectedItem.latitude, selectedItem.longitude)"><ion-icon name="navigate"></ion-icon></button>
+        </h4>
+        <h4>
+          <strong>Type:</strong> {{(detail | async)?.Type}}
+        </h4>
+        <h4>
+          <strong>Size:</strong> {{(detail | async)?.Size}}
+        </h4>
+        <h4>
+          <strong>Elevation:</strong> {{(detail | async)?.Elevation}}
+        </h4>
+        <h4>
+          <strong>Regulations:</strong> {{(detail | async)?.Regulations}}
+        </h4>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <h4><strong>Likely catch:</strong> {{(detail | async)?.Likely_catch}}</h4>
+        <h4>
+          <strong>Possible catch:</strong> {{(detail | async)?.Possible_catch}}
+        </h4>
+      </ion-card-content>
+    </ion-card>
+
+
+  </ion-card>
+</ion-content>

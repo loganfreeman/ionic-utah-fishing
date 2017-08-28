@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Fishing Report</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar [(ngModel)]="keyword" (ionInput)="setFilter()"></ion-searchbar>
+
+
+
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Distance</ion-label>
+      <ion-input type="number" [(ngModel)]="distance" (blur)="distanceChange($event)"></ion-input>
+      <ion-badge item-end color="secondary">{{distance}}</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-list radio-group>
+    <ion-item *ngFor="let status of ['All', 'Hot', 'Good', 'Fair', 'Slow', 'Closed']">
+      <ion-label>{{status}}</ion-label>
+      <ion-radio value="{{status}}" (ionSelect)="onStatusChange(status)"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+
+
+    <ion-card *ngFor="let item of (items | async)" >
+
+      <ion-card-header (click)="itemTapped($event, item)">
+        <span> {{item.title}} </span>
+        <span [ngSwitch]="item.status">
+          <div *ngSwitchCase="'No recent report'">
+            <strong>No recent report</strong>
+          </div>
+          <div class="rating" *ngSwitchDefault>
+            <strong>{{item.status}}</strong>
+            <span *ngFor="let index of item.rating">☆</span>
+          </div>
+        </span>
+      </ion-card-header>
+
+      <ion-card-content>
+        <strong>{{item.kind}}</strong>
+        <ion-row>
+          <button ion-button (click)="navigate(item.latitude, item.longitude)"><ion-icon name="navigate"></ion-icon></button>
+        </ion-row>
+      </ion-card-content>
+
+    </ion-card>
+
+
+  </ion-list>
+</ion-content>
