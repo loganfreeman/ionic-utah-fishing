@@ -23,6 +23,7 @@ export class SpeciesDetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiNativeProvider) {
     this.selectedItem = navParams.get('item');
+    this.detail = this.apiProvider.getFishingSpeciesDetail(this.selectedItem.link);
   }
 
   ionViewDidLoad() {

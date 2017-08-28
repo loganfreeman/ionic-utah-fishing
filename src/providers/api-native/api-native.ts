@@ -110,16 +110,21 @@ export class ApiNativeProvider {
   getFishingSpeciesDetail(link) {
     let promise = this.http.get(link, {}, {}).then(raw => raw.data).then(html => {
       let $ = cheerio.load(html);
-      let summary = $(".full-article h4 + p").text();
-      let details = $(".full-article ul").text();
+      let parent = $("#center");
+      let summary = parent.children('p').text();
+      let where = [];
+      $(parent.children('ul').eq(0)).children('li').each((index, li) => {
+        where.push($(li).text());
+      });
+      let regulations = [];
+      $(parent.children('ul').eq(1)).children('li').each((index, li) => {
+        regulations.push($(li).text());
+      })
       let obj = {
         summary: summary,
-        details: details
+        where: where,
+        regulations: regulations
       }
-      $(".full-article ul li").each((index, element) => {
-        let entry = $(element).text().split(":");
-        obj[entry[0].replace(" ", "_")] = entry[1].trim();
-      });
 
       return obj;
     })
