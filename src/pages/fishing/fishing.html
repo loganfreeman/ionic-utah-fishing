@@ -16,8 +16,6 @@
   <ion-searchbar [(ngModel)]="keyword" (ionInput)="setFilter()"></ion-searchbar>
 
   <ion-list>
-
-
     <ion-card *ngFor="let item of (items | async)" >
 
       <ion-card-header (click)="itemTapped($event, item)">
@@ -41,7 +39,6 @@
       </ion-card-content>
 
     </ion-card>
-
-
   </ion-list>
+
 </ion-content>

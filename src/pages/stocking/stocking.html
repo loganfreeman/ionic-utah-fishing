@@ -17,5 +17,21 @@
 
 
 <ion-content padding>
+  <ion-searchbar [(ngModel)]="keyword" (ionInput)="setFilter()"></ion-searchbar>
+
+  <ion-list>
+    <ion-card *ngFor="let item of (items | async)" >
+
+      <ion-card-header (click)="itemTapped($event, item)">
+        <span> {{item.watername}} </span>
+      </ion-card-header>
+
+      <ion-item>
+        <h2>{{item.species}} stocked at <i>{{item.stockdate}}</i></h2>
+        <p><strong>Quantity:</strong> {{item.quantity}} <strong>Length:</strong> {{item.length}} </p>
+      </ion-item>
+
+    </ion-card>
+  </ion-list>
 
 </ion-content>

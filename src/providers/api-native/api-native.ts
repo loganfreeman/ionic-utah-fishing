@@ -73,9 +73,33 @@ export class ApiNativeProvider {
 
   utahFishingRoot: string = "https://wildlife.utah.gov/hotspots/";
 
+  utahStockingRoot: string = "https://dwrapps.utah.gov/fishstocking/Fish";
+
 
   constructor(public http: HTTP) {
     console.log('Hello ApiNativeProvider Provider');
+  }
+
+  getStockingReport() {
+    let promise = this.http.get(this.utahStockingRoot, {}, {}).then(raw => raw.data).then(html => {
+      let $ = cheerio.load(html);
+      let items = [];
+      $('#fishTable tbody tr').each((index, element) => {
+        let item = {};
+
+        $(element).children('td').each((index, child) => {
+          let td = $(child);
+          let key = td.attr('class');
+          item[key] = td.text();
+        });
+
+        items.push(item);
+      });
+
+      return items;
+    });
+
+    return Observable.fromPromise(promise);
   }
 
   getHotSpots() {
