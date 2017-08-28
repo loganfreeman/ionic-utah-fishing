@@ -18,7 +18,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-card *ngFor="let item of (items | async)" >
+    <ion-card *ngFor="let item of (items | async)" (click)="itemTapped($event, item)">
 
       <ion-card-header>
         <span> {{item.title}} </span>

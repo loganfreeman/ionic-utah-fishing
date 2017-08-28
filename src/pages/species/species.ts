@@ -33,4 +33,10 @@ export class SpeciesPage {
     this.loading.present();
   }
 
+  itemTapped(event, item) {
+    this.navCtrl.push('SpeciesDetailPage', {
+      item: item
+    });
+  }
+
 }

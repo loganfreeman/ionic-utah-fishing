@@ -107,6 +107,26 @@ export class ApiNativeProvider {
     return Observable.fromPromise(promise);
   }
 
+  getFishingSpeciesDetail(link) {
+    let promise = this.http.get(link, {}, {}).then(raw => raw.data).then(html => {
+      let $ = cheerio.load(html);
+      let summary = $(".full-article h4 + p").text();
+      let details = $(".full-article ul").text();
+      let obj = {
+        summary: summary,
+        details: details
+      }
+      $(".full-article ul li").each((index, element) => {
+        let entry = $(element).text().split(":");
+        obj[entry[0].replace(" ", "_")] = entry[1].trim();
+      });
+
+      return obj;
+    })
+
+    return Observable.fromPromise(promise);
+  }
+
   getStockingReport() {
     let promise = this.http.get(this.utahStockingRoot, {}, {}).then(raw => raw.data).then(html => {
       let $ = cheerio.load(html);
