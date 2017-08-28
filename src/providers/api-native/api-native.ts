@@ -75,9 +75,36 @@ export class ApiNativeProvider {
 
   utahStockingRoot: string = "https://dwrapps.utah.gov/fishstocking/Fish";
 
+  utahFishingSpeciesRoot: string = "http://www.utahfishinginfo.com/utahfish/";
+
+  utahFishingInfoRoot: string = "http://www.utahfishinginfo.com/";
 
   constructor(public http: HTTP) {
     console.log('Hello ApiNativeProvider Provider');
+  }
+
+  getFishingSpecies() {
+    let promise = this.http.get(this.utahFishingSpeciesRoot, {}, {}).then(raw => raw.data).then(html => {
+      let $ = cheerio.load(html);
+      let items = [];
+      $('#center table tbody td').each((index, element) => {
+        let item = {
+          title: '',
+          image: '',
+          link: ''
+        };
+        let link = $(element).children('a').first();
+        let img = $(link).children('img').first();
+        item.title = $(element).text();
+        item.image = `${this.utahFishingInfoRoot}${$(img).attr('src').substring(3)}`;
+        item.link = `${this.utahFishingSpeciesRoot}${$(link).attr('href')}`;
+        items.push(item);
+      });
+
+      return items;
+    });
+
+    return Observable.fromPromise(promise);
   }
 
   getStockingReport() {

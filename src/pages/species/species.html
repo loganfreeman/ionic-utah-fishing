@@ -1,5 +1,5 @@
 <!--
-  Generated template for the StockingPage page.
+  Generated template for the SpeciesPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -10,28 +10,24 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>stocking</ion-title>
+    <ion-title>Utah Fish Species</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-searchbar [(ngModel)]="keyword" (ionInput)="setFilter()"></ion-searchbar>
-
   <ion-list>
     <ion-card *ngFor="let item of (items | async)" >
 
       <ion-card-header>
-        <span> {{item.watername}} </span>
+        <span> {{item.title}} </span>
       </ion-card-header>
 
       <ion-item>
-        <h2>{{item.species}} stocked at <i>{{item.stockdate}}</i></h2>
-        <p><strong>Quantity:</strong> {{item.quantity}} <strong>Length:</strong> {{item.length}} </p>
+        <img src="{{item.image}}" />
       </ion-item>
 
     </ion-card>
   </ion-list>
-
 </ion-content>

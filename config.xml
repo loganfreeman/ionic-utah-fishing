@@ -3,7 +3,7 @@
     <name>ionic Utah fishing</name>
     <description>An awesome Ionic/Cordova app for Utah fishing</description>
     <author email="amazingloganman@gmail.com" href="http://ionicframework.com/">Shanhong Cheng</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://155.101.208.103:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

@@ -27,7 +27,8 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Fishing Report', component: 'FishingPage'},
-      { title: 'Stocking', component: 'StockingPage'}
+      { title: 'Stocking', component: 'StockingPage'},
+      { title: 'Species', component: 'SpeciesPage'}
     ];
   }
 
