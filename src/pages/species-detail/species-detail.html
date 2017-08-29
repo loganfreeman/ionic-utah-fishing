@@ -20,33 +20,9 @@
   <ion-card *ngIf="selectedItem">
 
     <ion-card-content>
-      {{(detail | async)?.summary}}
+      <div [innerHTML]="(detail | async)?.summary"></div>
     </ion-card-content>
-
-    <ion-card>
-      <ion-card-header>Where to catch</ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item  *ngFor="let location of (detail | async)?.where" >
-            {{location}}
-          </ion-item>
-        </ion-list>
-
-      </ion-card-content>
-    </ion-card>
 
   </ion-card>
 
-
-  <ion-card>
-    <ion-card-header>Regulations</ion-card-header>
-
-    <ion-card-content>
-      <ion-list>
-        <ion-item  *ngFor="let regulation of (detail | async)?.regulations" >
-          {{regulation}}
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
 </ion-content>

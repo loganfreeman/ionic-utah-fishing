@@ -4,8 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/map';
 
-
-
+import {DomSanitizer} from '@angular/platform-browser'
 
 import cheerio from 'cheerio';
 
@@ -79,7 +78,7 @@ export class ApiNativeProvider {
 
   utahFishingInfoRoot: string = "http://www.utahfishinginfo.com/";
 
-  constructor(public http: HTTP) {
+  constructor(public http: HTTP, private sanitizer: DomSanitizer) {
     console.log('Hello ApiNativeProvider Provider');
   }
 
@@ -111,7 +110,10 @@ export class ApiNativeProvider {
     let promise = this.http.get(link, {}, {}).then(raw => raw.data).then(html => {
       let $ = cheerio.load(html);
       let parent = $("#center");
-      let summary = parent.children('p').text();
+      let summaries = [];
+      parent.children('p').each((index, p) => {
+        summaries.push(`<p>${$(p).text()}</p>`);
+      });
       let where = [];
       $(parent.children('ul').eq(0)).children('li').each((index, li) => {
         where.push($(li).text());
@@ -121,7 +123,7 @@ export class ApiNativeProvider {
         regulations.push($(li).text());
       })
       let obj = {
-        summary: summary,
+        summary: summaries.join("<br>"),
         where: where,
         regulations: regulations
       }
