@@ -4,8 +4,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HTTP } from '@ionic-native/http';
 
-import { MusicPage } from '../pages/music/music';
-
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
@@ -21,8 +19,7 @@ import { ApiNativeProvider } from '../providers/api-native/api-native';
 
 @NgModule({
   declarations: [
-    MyApp,
-    MusicPage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -32,8 +29,7 @@ import { ApiNativeProvider } from '../providers/api-native/api-native';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    MusicPage
+    MyApp
   ],
   providers: [
     StatusBar,
