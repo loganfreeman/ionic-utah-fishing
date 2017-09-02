@@ -40,6 +40,23 @@ ionic cordova run android --device
 ionic cordova plugin add cordova-plugin-http
 ```
 
+### [How to build release](https://baxeico.wordpress.com/2015/05/20/how-to-automatically-sign-your-android-apk-using-ionic-framework-and-crosswalk/)
+
+All of these steps can be automated by creating a file named `release-signing.properties` with your favorite text editor (vi in my case) in your platforms/android/ directory.
+
+```
+storeFile=/path/to/keystore/yourname.keystore
+keyAlias=youralias
+storePassword=your_keystore_password
+keyPassword=your_key_password
+```
+
+Then build release by running:
+```
+ionic cordova build --release android
+```
+
+
 ### How to debug
 ```
 ionic cordova run <ios or android> --device -l --debug
